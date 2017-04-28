@@ -20,7 +20,7 @@ aclocal.m4
 stamp-h1
 
 # Targets
-hello_c
+demo-cpputest
 
 # Build temporaries
 .deps/
