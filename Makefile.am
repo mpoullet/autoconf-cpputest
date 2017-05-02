@@ -7,9 +7,9 @@ bin_PROGRAMS = demo-cpputest
 demo_cpputest_SOURCES = src/FirstTestGroup.cpp \
                         src/AllTests.cpp
 
-# Flags for the C preprocessor
+# C preprocessor
 AM_CPPFLAGS = $(CPPUTEST_CFLAGS)
-# Flags for the C++ compiler
+# C++ compiler
 AM_CXXFLAGS = -Wall -Wextra -Werror -pedantic
 
 demo_cpputest_LDADD = $(CPPUTEST_LIBS)
