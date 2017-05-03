@@ -16,6 +16,7 @@ install:
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
     - autoconf --version
     - automake --version
+    - g++ --version
 script:
     - autoreconf --install
     - ./configure
