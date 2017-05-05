@@ -1,25 +1,34 @@
 language:
-    - cpp
+- cpp
 dist:
-    - trusty
+- trusty
 compiler:
-    - gcc
-    - clang
+- gcc
+- clang
 before_install:
-    - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-    - sudo apt-get -qq update
+- sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+- sudo apt-get -qq update
 install:
-    - sudo apt-get install -y autoconf-archive
-    - sudo apt-get install -y libboost-all-dev
-    - sudo apt-get install -y cpputest
-    - sudo apt-get install -qq g++-6
-    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
+- sudo apt-get install -y autoconf-archive
+- sudo apt-get install -y libboost-all-dev
+- sudo apt-get install -y cpputest
+- sudo apt-get install -qq g++-6
+- sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-6 90
 before_script:
-    - autoconf --version
-    - automake --version
+- autoconf --version
+- automake --version
 script:
-    - autoreconf --install
-    - ./configure
-    - make V=1 -j4 clean all dist
+- autoreconf --install
+- ./configure
+- make V=1 -j4 clean all dist
 after_success:
-    - ./demo-cpputest -c
+- ./demo-cpputest -c
+deploy:
+  provider: releases
+  api_key:
+    secure: Dm9l0kyhHnp10RhAsQL1P+HIwGnVUGN9xCb3lJagR0MUjaBLdAN7gYscrguVoz1jSIC+ESHz1xR73rI74YLxo8ApuSWH4SEXz+nLvajQB3vqeE65/rGOYDC3/lvoRbsJ0jjJiz+HABVmGAAIEql/tRWNnqW/8fe66rAYo9YN9lDb7aWMArf9fi2dGtwCdsMrE+4Y/Wu3QTUY8Egr9CaEV+FLp255K+EuDKB7wGHrHo4XMTYKbhGFsamnd/bU0/nVJhfIcw1UivV/wywe6cIkXJ/yDytDhA0GtuHwJjVCu4jDQ9R1C31J4RkRCL95mrVxZdWRuWt6gBYkTNF/X4jWT+t08cmEt1MqcBk1fetj87vgqxiJHf2+4KcRwfwRLUgvPds482sTgowIEqdR+ilcDhn3ggpMvAPVK6MdgMY6102sRRWRDwg7A3msiCTC8j8o9gTwRfR8SkOxIME9K3spv07MvHqP72ZSj2J3bbPIEpsRPPP4lDdiPS+fOnBzBsJnawmrlz2PLe6A06O/bczBmIXlqZbK092N4jRSvF5BtNNNU8dkBMbx4AUKdzXpoq8AAh1OywwQEdbNxB7jhNbwwlYdFSroizvIDr2hEeg8UTi1A+hfEU+SrkxLI8+0YC+07jfoJ6nEYvpTyARdJVkXyHfCj39xL0eUQmcc2K8NU+4=
+  file: demo-cpputest-1.0.0.tar.bz2
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: mpoullet/autotools-cpputest
